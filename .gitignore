@@ -1,0 +1,15 @@
+/musicdatabase/spotifysecrets.py
+/musicdatabase/MillionSongSubset/
+musicdatabase/__pycache__/spotifysecrets.cpython-313.pyc
+.DS_Store
+musicdatabase/.cache
+*.csv
+/musicdatabase/spotifysecrets.py
+*.zip
+/
+musicdatabase/__pycache__/hdf5_getters.cpython-313.pyc
+/images/data_256/
+/images/test_256/
+/images/cafetest.jpg
+images/data/
+*.pth
