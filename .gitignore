@@ -13,3 +13,4 @@ musicdatabase/__pycache__/hdf5_getters.cpython-313.pyc
 /images/cafetest.jpg
 images/data/
 *.pth
+.venv
