@@ -12,5 +12,5 @@ musicdatabase/__pycache__/hdf5_getters.cpython-313.pyc
 /images/test_256/
 /images/cafetest.jpg
 images/data/
-*.pth
 .venv
+efficientnet_finetuned.pth

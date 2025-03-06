@@ -6,11 +6,11 @@ from efficientnet_pytorch import EfficientNet
 
 
 # Load the same model architecture (nvidia_efficientnet_b0)
-efficientnet = EfficientNet.from_pretrained('efficientnet-b5')
-efficientnet._fc = torch.nn.Linear(in_features=efficientnet._fc.in_features, out_features=290)
+efficientnet = torch.hub.load('NVIDIA/DeepLearningExamples:torchhub', 'nvidia_efficientnet_b0', pretrained=True)
+efficientnet.classifier.fc = torch.nn.Linear(in_features=efficientnet.classifier.fc.in_features, out_features=290)
 
 # Load the trained weights (same as saved previously)
-efficientnet.load_state_dict(torch.load("efficientnet_finetuned.pth"))
+efficientnet.load_state_dict(torch.load("/uolstore/home/users/sc21cm/disswork/synoptic-project-CameronFMacKay/images/best_efficientnet.pth"))
 
 # Set model to evaluation mode and move to device
 efficientnet.eval().to('cpu')  # or 'mps' for Apple Silicon GPU, or 'cuda' for a regular GPU
@@ -23,7 +23,7 @@ transform = transforms.Compose([
 ])
 
 # Example for testing with a new image:
-image_path = "cafetest.jpg"
+image_path = "/vol/scratch/SoC/misc/2024/sc21cm/train_256_places365standard/data_256/c/coffee_shop/00000001.jpg"
 image = Image.open(image_path).convert("RGB")
 
 # Apply transformation
@@ -40,7 +40,7 @@ with torch.no_grad():
 # Print the predicted label
 print(f"Predicted label: {predicted_label.item()}")
 
-base_dir = "data_256"
+base_dir = "/vol/scratch/SoC/misc/2024/sc21cm/train_256_places365standard/data_256/"
 import os
 image_paths = []
 labels = []
