@@ -3,7 +3,7 @@ from PIL import Image
 import torch.hub
 from torchvision import transforms
 from efficientnet_pytorch import EfficientNet
-
+import csv
 
 # Load the same model architecture (nvidia_efficientnet_b0)
 efficientnet = torch.hub.load('NVIDIA/DeepLearningExamples:torchhub', 'nvidia_efficientnet_b0', pretrained=True)
@@ -13,7 +13,7 @@ efficientnet.classifier.fc = torch.nn.Linear(in_features=efficientnet.classifier
 efficientnet.load_state_dict(torch.load("/uolstore/home/users/sc21cm/disswork/synoptic-project-CameronFMacKay/images/best_efficientnet.pth"))
 
 # Set model to evaluation mode and move to device
-efficientnet.eval().to('cpu')  # or 'mps' for Apple Silicon GPU, or 'cuda' for a regular GPU
+efficientnet.eval().to('cpu') 
 
 # Define transformation for image preprocessing (same as during training)
 transform = transforms.Compose([
@@ -40,29 +40,15 @@ with torch.no_grad():
 # Print the predicted label
 print(f"Predicted label: {predicted_label.item()}")
 
-base_dir = "/vol/scratch/SoC/misc/2024/sc21cm/train_256_places365standard/data_256/"
-import os
-image_paths = []
-labels = []
+# Load class mapping from CSV
+class_mapping = {}
+with open('classmapping.csv', mode='r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        class_mapping[int(row[0])] = row[1]  # Assuming the first column is index and second is class name
 
-for main_dir in os.listdir(base_dir):
-    main_path = os.path.join(base_dir, main_dir)
-    if os.path.isdir(main_path):
-        for place in os.listdir(main_path):
-            place_path = os.path.join(main_path, place)
-            if os.path.isdir(place_path):
-                files = [os.path.join(place_path, f) for f in os.listdir(place_path) if f.endswith(('.png', '.jpg', '.jpeg'))]
-                image_paths.extend(files)
-                labels.extend([f"{main_dir}/{place}"] * len(files))
+# Get the predicted label class name from the CSV mapping
+predicted_class_name = class_mapping.get(predicted_label.item(), "Unknown")
 
-# Shuffle dataset (combined image paths and labels) before splitting
-combined = list(zip(image_paths, labels))
-image_paths, labels = zip(*combined)
-
-# Create a mapping of label names to numeric indices
-unique_labels = sorted(set(labels))
-label_to_index = {label: idx for idx, label in enumerate(unique_labels)}
-index_to_label = {idx: label for label, idx in label_to_index.items()}
-
-
-print(f"Predicted: {index_to_label[predicted_label.item()]}")
+# Print the predicted class name
+print(f"Predicted label: {predicted_class_name}")
