@@ -42,7 +42,7 @@ def collapse_folders_into_one(src_dir, dest_dir):
     print("All files have been moved and renamed.")
 
 # Example usage
-src_directory =  "/vol/scratch/SoC/misc/2024/sc21cm/train_256_places365standard/data_256/w/water"
+src_directory =  "/vol/scratch/SoC/misc/2024/sc21cm/train_256_places365standard/data_256/v/vet_and_kennels"
 dest_directory = src_directory  # Replace with the path to your destination directory
 
 collapse_folders_into_one(src_directory, dest_directory)
