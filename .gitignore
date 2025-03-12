@@ -16,3 +16,5 @@ efficientnet_finetuned.pth
 matching/songs_lyrics_adjusted.csv
 matching/songs.db
 matching/song_lyrics.index
+backend/matching/songs_lyrics_adjusted.csv
+backend/matching/song_lyrics.index
