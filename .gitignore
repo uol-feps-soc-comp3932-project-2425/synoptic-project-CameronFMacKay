@@ -1,4 +1,4 @@
-/musicdatabase/spotifysecrets.py
+git /musicdatabase/spotifysecrets.py
 /musicdatabase/MillionSongSubset/
 musicdatabase/__pycache__/spotifysecrets.cpython-313.pyc
 .DS_Store
@@ -16,3 +16,11 @@ efficientnet_finetuned.pth
 matching/songs_lyrics_adjusted.csv
 matching/songs.db
 matching/song_lyrics.index
+backend/matching/songs_lyrics_adjusted.csv
+backend/matching/song_lyrics.index
+backend/images/best_efficientnet.pth
+backend/images/classmapping.csv
+backend/images/efficientnet_finetunedfull.pth
+backend/matching/songs.db
+backend/apicode/uploads/
+*.pyc

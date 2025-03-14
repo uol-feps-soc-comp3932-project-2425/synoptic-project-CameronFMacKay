@@ -1,7 +1,0 @@
-torch
-torchvision
-Pillow
-scikit-learn
-efficientnet-pytorch
-requests
-validators
