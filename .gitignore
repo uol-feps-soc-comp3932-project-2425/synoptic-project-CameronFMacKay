@@ -22,3 +22,5 @@ backend/images/best_efficientnet.pth
 backend/images/classmapping.csv
 backend/images/efficientnet_finetunedfull.pth
 backend/matching/songs.db
+backend/apicode/uploads/
+*.pyc

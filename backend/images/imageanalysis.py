@@ -41,14 +41,11 @@ def image_analysis(image_path):
     grey_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     name = rgb_to_color_name((most_dominant_colour[0],most_dominant_colour[1],most_dominant_colour[2]))
-    print(name)
     details ={
-        'brightness' : np.mean(grey_img), # 0 black 255 white
-        'contrast' : np.std(grey_img), # 0 little contrast 255 high contrast 
-        'main_colour' : most_dominant_colour,
-        'second_colour' : second_dominant_colour
+        'brightness' : float(np.mean(grey_img)), # 0 black 255 white
+        'contrast' : float(np.std(grey_img)), # 0 little contrast 255 high contrast 
+        'main_colour' : most_dominant_colour.tolist(),
+        'second_colour' : second_dominant_colour.tolist()
     }
 
     return details
-
-print(image_analysis('/vol/scratch/SoC/misc/2024/sc21cm/train_256_places365standard/data_256/c/coffee_shop/00000022.jpg'))
