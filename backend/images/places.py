@@ -9,10 +9,10 @@ import csv
 def classify_image(image_path):
     # Load the same model architecture (nvidia_efficientnet_b0)
     efficientnet = torch.hub.load('NVIDIA/DeepLearningExamples:torchhub', 'nvidia_efficientnet_b0', pretrained=True)
-    efficientnet.classifier.fc = torch.nn.Linear(in_features=efficientnet.classifier.fc.in_features, out_features=290)
+    efficientnet.classifier.fc = torch.nn.Linear(in_features=efficientnet.classifier.fc.in_features, out_features=58)
 
     # Load the trained weights (same as saved previously)
-    efficientnet.load_state_dict(torch.load("/Users/cam/Documents/diss/copy/synoptic-project-CameronFMacKay/backend/images/best_efficientnet57.pth"))
+    efficientnet.load_state_dict(torch.load("/uolstore/home/users/sc21cm/disswork/synoptic-project-CameronFMacKay/backend/images/best_efficientnet57.pth"))
 
     # Set model to evaluation mode and move to device
     efficientnet.eval().to('cpu') 
@@ -40,7 +40,7 @@ def classify_image(image_path):
 
     # Load class mapping from CSV
     class_mapping = {}
-    with open('classmapping.csv', mode='r') as file:
+    with open('/uolstore/home/users/sc21cm/disswork/synoptic-project-CameronFMacKay/backend/images/classmapping.csv', mode='r') as file:
         reader = csv.reader(file)
         for row in reader:
             class_mapping[int(row[0])] = row[1]  # Assuming the first column is index and second is class name
@@ -50,6 +50,6 @@ def classify_image(image_path):
 
     # Print the predicted class name
     print(f"Predicted label: {predicted_class_name}")
+    return predicted_class_name
     
 
-print(classify_image('backend/apicode/uploads/000000004954.jpg'))

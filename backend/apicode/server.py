@@ -9,6 +9,7 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../images
 sys.path.append(module_path)
 
 import imageanalysis
+import places
 
 app = FastAPI()
 
@@ -32,6 +33,8 @@ async def upload_file(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
         
     results = imageanalysis.image_analysis(file_location)
+    place = places.classify_image(file_location)
+    results['place'] = place
     return JSONResponse(content={"message": "File uploaded successfully", "filename": file.filename, "image_data" : results})
 
 

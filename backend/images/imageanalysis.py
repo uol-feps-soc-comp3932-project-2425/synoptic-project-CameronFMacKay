@@ -45,7 +45,8 @@ def image_analysis(image_path):
         'brightness' : float(np.mean(grey_img)), # 0 black 255 white
         'contrast' : float(np.std(grey_img)), # 0 little contrast 255 high contrast 
         'main_colour' : most_dominant_colour.tolist(),
-        'second_colour' : second_dominant_colour.tolist()
+        'second_colour': second_dominant_colour.tolist() if second_dominant_colour is not None else None
+
     }
 
     return details
