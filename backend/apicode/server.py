@@ -13,6 +13,7 @@ sys.path.append(module_path)
 import imageanalysis
 import places
 import tagfunction
+import gentag
 
 app = FastAPI()
 
@@ -37,9 +38,9 @@ async def upload_file(file: UploadFile = File(...)):
         
     results = imageanalysis.image_analysis(file_location)
     image = places.classify_image(file_location)
-    tag = tagfunction.main(image)
-    print(tag)
     results['image'] = image
+    output = gentag.generate_tag_from_image_context_automated(results)
+    tag = tagfunction.main(output)
     results['tag'] = tag
     return JSONResponse(content={"message": "File uploaded successfully", "filename": file.filename, "image_data" : results})
 

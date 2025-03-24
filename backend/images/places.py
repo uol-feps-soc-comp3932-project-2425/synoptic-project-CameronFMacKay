@@ -43,14 +43,11 @@ def classify_image(image_path):
         reader = csv.reader(file)
         for row in reader:
             class_mapping[int(row[0])] = row[1]  # Assuming the first column is index and second is class name
-
     # Get the predicted label class name from the CSV mapping
     predicted_class_name = class_mapping.get(predicted_label.item(), "Unknown")
 
     # Print the predicted class name
     print(f"Predicted label: {predicted_class_name}")
     return predicted_class_name
-    return predicted_class_name
     
 
-print(classify_image('../images/lax.jpg'))
