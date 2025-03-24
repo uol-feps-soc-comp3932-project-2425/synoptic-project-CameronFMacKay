@@ -7,10 +7,10 @@ import csv
 
 # Load the same model architecture (nvidia_efficientnet_b0)
 efficientnet = torch.hub.load('NVIDIA/DeepLearningExamples:torchhub', 'nvidia_efficientnet_b0', pretrained=True)
-efficientnet.classifier.fc = torch.nn.Linear(in_features=efficientnet.classifier.fc.in_features, out_features=290)
+efficientnet.classifier.fc = torch.nn.Linear(in_features=efficientnet.classifier.fc.in_features, out_features=58)
 
 # Load the trained weights (same as saved previously)
-efficientnet.load_state_dict(torch.load("/uolstore/home/users/sc21cm/disswork/synoptic-project-CameronFMacKay/images/best_efficientnet.pth"))
+efficientnet.load_state_dict(torch.load("backend/images/best_efficientnet57.pth", map_location=torch.device('cpu')))
 
 # Set model to evaluation mode and move to device
 efficientnet.eval().to('cpu') 
@@ -23,7 +23,7 @@ transform = transforms.Compose([
 ])
 
 # Example for testing with a new image:
-image_path = "/vol/scratch/SoC/misc/2024/sc21cm/train_256_places365standard/data_256/c/coffee_shop/00000001.jpg"
+image_path = "/Users/cam/Downloads/ballgroupchaticon.jpeg"
 image = Image.open(image_path).convert("RGB")
 
 # Apply transformation
@@ -42,7 +42,7 @@ print(f"Predicted label: {predicted_label.item()}")
 
 # Load class mapping from CSV
 class_mapping = {}
-with open('classmapping.csv', mode='r') as file:
+with open('backend/images/classmapping.csv', mode='r') as file:
     reader = csv.reader(file)
     for row in reader:
         class_mapping[int(row[0])] = row[1]  # Assuming the first column is index and second is class name

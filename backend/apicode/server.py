@@ -8,7 +8,11 @@ import sys
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../images'))
 sys.path.append(module_path)
 
+module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../matching'))
+sys.path.append(module_path)
 import imageanalysis
+import places
+import tagfunction
 
 app = FastAPI()
 
@@ -32,6 +36,11 @@ async def upload_file(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
         
     results = imageanalysis.image_analysis(file_location)
+    image = places.classify_image(file_location)
+    tag = tagfunction.main(image)
+    print(tag)
+    results['image'] = image
+    results['tag'] = tag
     return JSONResponse(content={"message": "File uploaded successfully", "filename": file.filename, "image_data" : results})
 
 
