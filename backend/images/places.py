@@ -50,6 +50,7 @@ def classify_image(image_path):
     # Print the predicted class name
     print(f"Predicted label: {predicted_class_name}")
     return predicted_class_name
+    return predicted_class_name
     
 
 print(classify_image('../images/lax.jpg'))

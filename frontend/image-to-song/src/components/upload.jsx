@@ -3,10 +3,15 @@ import axios from "axios";
 
 export default function FileUpload() {
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [message, setMessage] = useState("");
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+    }
   };
 
   const handleUpload = async () => {
@@ -30,16 +35,20 @@ export default function FileUpload() {
   };
 
   return (
-    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
+    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md w-96">
       <h2 className="text-lg font-semibold mb-4">Upload a File</h2>
-
+      
       <input type="file" onChange={handleFileChange} className="mb-4" />
-
+      
+      {preview && (
+        <img src={preview} alt="Preview" className="w-32 h-32 object-cover mb-4 border rounded" />
+      )}
+      
       <button onClick={handleUpload} className="px-4 py-2 bg-blue-600 text-white rounded">
         Upload
       </button>
-
-      {message && <p className="mt-4 text-sm">{message}</p>}
+      
+      {message && <pre className="mt-4 text-sm bg-gray-100 p-2 rounded w-full text-left overflow-auto">{message}</pre>}
     </div>
   );
 }
