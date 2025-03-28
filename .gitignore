@@ -24,3 +24,11 @@ backend/images/efficientnet_finetunedfull.pth
 backend/matching/songs.db
 backend/apicode/uploads/
 *.pyc
+backend/matching/song_lyrics2.index
+.gitignore
+*.db
+backend/matching/spotify_millsongdata.csv
+backend/matching/hot100lyrics.csv
+backend/matching/hot.csv
+backend/matching/combined_output.csv
+.gitignore

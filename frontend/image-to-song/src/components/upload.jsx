@@ -83,7 +83,7 @@ export default function FileUpload({ onSongDataReceived }) {
       />
       
       {preview && (
-        <img src={preview} alt="Preview" className="w-32 h-32 object-cover mb-4 border rounded" />
+        <img src={preview} alt="Preview" className="w-256 h-256 object-cover mb-4 border rounded" />
       )}
       
       <button 

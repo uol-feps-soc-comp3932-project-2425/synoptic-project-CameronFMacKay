@@ -86,76 +86,72 @@ def get_mood_descriptor(brightness, contrast):
         return "intense" if c_norm > 0.5 else "moody"
 
 def generate_tag_from_image_context_automated(image_data):
-    """
-    Generate a descriptive tag for song matching based on image context data,
-    using WordNet to find semantically similar words automatically.
-    
-    Args:
-        image_data (dict): Dictionary containing image context data including:
-            - brightness (float): The brightness value of the image (0-255 scale)
-            - contrast (float): The contrast value of the image (0-255 scale)
-            - main_colour (list): RGB values of the main color
-            - second_colour (list): RGB values of the secondary color (can be None)
-            - image (str): The image classification tag
-    
-    Returns:
-        str: A descriptive tag that can be used to find similar songs
-    """
-    # Initialize base descriptors with a reasonable capacity to avoid resizing
     descriptors = []
-    
-    # Process the image classification tag
-    if "image" in image_data and image_data["image"]:
-        image_tag = image_data["image"]
+
+    # Process primary image tag
+    image_tag = image_data.get("image", "")
+    base_words = image_tag.replace("_", " ").split()
+    descriptors.extend(base_words)
+    for word in base_words:
+        descriptors.extend(get_similar_words(word))
+
+    # Mood from brightness and contrast
+    brightness = image_data.get("brightness", 0)
+    contrast = image_data.get("contrast", 0)
+    mood = get_mood_descriptor(brightness, contrast)
+    descriptors.append(mood)
+    descriptors.extend(get_similar_words(mood, max_results=2))
+
+    # Blur score for atmosphere
+    blur_score = image_data.get("blur_score", 0)
+    # if blur_score > 600:
         
-        # Split compound tags more efficiently
-        base_words = image_tag.replace("_", " ").split()
-        descriptors.extend(base_words)
-        
-        # Find semantically similar words using WordNet - batch process to reduce overhead
-        for word in base_words:
-            similar_words = get_similar_words(word)
-            descriptors.extend(similar_words)
+        # descriptors.append("dreamy")
+        # descriptors.append("nostalgic")
+    if blur_score > 400:
+        descriptors.append("soft")
+    elif blur_score < 200:
+        descriptors.append("sharp")
+        descriptors.append("realistic")
+    else:
+        descriptors.append("subtle")
     
-    # Process brightness and contrast to add mood descriptors
-    if "brightness" in image_data and "contrast" in image_data:
-        mood_descriptor = get_mood_descriptor(image_data["brightness"], image_data["contrast"])
-        descriptors.append(mood_descriptor)
-        
-        # Add similar mood words
-        mood_similar = get_similar_words(mood_descriptor, max_results=2)
-        if mood_similar:
-            descriptors.extend(mood_similar)
-    
-    # Process main color to add color-related context
-    color_term = ""
-    if "main_colour" in image_data and image_data["main_colour"]:
-        r, g, b = image_data["main_colour"]
-        color_term = get_color_term(r, g, b)
-        
-        if color_term:
-            # Find related words to color term
-            color_related = get_similar_words(color_term, max_results=1)
-            if color_related:
-                descriptors.extend(color_related)
-    
-    # Use a set to efficiently remove duplicates, then convert back to list
+    if brightness > 100:
+        descriptors.append("bright")
+    elif brightness < 50:
+        descriptors.append("dark")
+
+    # Use top 2 dominant colors
+    if "colors" in image_data:
+        top_colors = sorted(image_data["colors"], key=lambda c: c["percentage"], reverse=True)[:2]
+        for color in top_colors:
+            color_name = color["name"].lower()
+            descriptors.append(color_name)
+            descriptors.extend(get_similar_words(color_name, max_results=1))
+
+    # Aspect ratio
+    ar = image_data.get("composition", {}).get("aspect_ratio", 1)
+    if ar > 1.6:
+        descriptors.append("cinematic")
+    elif ar < 1.1:
+        descriptors.append("intimate")
+
+    # Rule of Thirds & Symmetry
+    composition = image_data.get("composition", {})
+    if composition.get("rule_of_thirds_score", 0) > 0.8:
+        descriptors.append("artistic")
+    if composition.get("symmetry_score", 0) > 0.7:
+        descriptors.append("symmetrical")
+
+    # Final deduplication and selection
     unique_descriptors = []
     seen = set()
     for d in descriptors:
         if d and d not in seen:
             unique_descriptors.append(d)
             seen.add(d)
-    
-    # Limit to top N most relevant terms
-    max_terms = 8
-    final_descriptors = unique_descriptors[:max_terms]
-    
-    # Add color term if it exists and not already in the list
-    if color_term and color_term not in seen and len(final_descriptors) < max_terms:
-        final_descriptors.append(color_term)
-    
-    # Join descriptors into a tag
-    tag = " ".join(final_descriptors)
-    
-    return tag
+
+    # Trim or adjust weight if needed
+    final_descriptors = unique_descriptors[:10]
+
+    return " ".join(final_descriptors)

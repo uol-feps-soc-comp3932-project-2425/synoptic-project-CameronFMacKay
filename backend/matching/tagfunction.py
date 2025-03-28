@@ -8,10 +8,10 @@ import re
 
 def search_songs(tag, top_k, model, device):
     tag_embedding = model.encode([tag], convert_to_numpy=True, device=device)
-    index = faiss.read_index("../matching/song_lyrics.index")
+    index = faiss.read_index("../matching/song_lyrics4.index")
     distances, indices = index.search(tag_embedding, top_k)
     # Retrieve song metadata
-    db_conn = sqlite3.connect("../matching/songs.db")
+    db_conn = sqlite3.connect("../matching/songs4.db")
     cursor = db_conn.cursor()
     
     results = []

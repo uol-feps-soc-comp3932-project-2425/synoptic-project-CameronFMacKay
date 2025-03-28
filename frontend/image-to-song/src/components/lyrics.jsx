@@ -64,7 +64,7 @@ export default function Lyrics({ songData }) {
             <h3 className="font-bold text-xl">{currentSong.title}</h3>
             <p className="text-gray-600">by {currentSong.artist}</p>
             <p className="text-sm text-gray-500">
-              Match score: {(currentSong.overall_similarity * 100).toFixed(1)}%
+              Match score: {(currentSong.overall_similarity * 100).toFixed(1)}
             </p>
           </div>
           
@@ -80,7 +80,7 @@ export default function Lyrics({ songData }) {
               let currentIndex = 0;
               const lineElements = [];
               const sortedWords = [...line.words].sort((a, b) => a.start_idx - b.start_idx);
-              
+              console.log(sortedWords)
               // Split the line text into words to apply highlighting
               const words = line.text.split(' ');
               
@@ -113,7 +113,7 @@ export default function Lyrics({ songData }) {
                   <span 
                     key={`match-${lineIndex}-${matchIndex}`} 
                     style={highlightStyle}
-                    title={`Match strength: ${match.strength} (${(match.similarity * 100).toFixed(1)}%)`}
+                    title={`Match strength: ${match.strength} (${(match.similarity * 100).toFixed(1)})`}
                   >
                     {words.slice(startWordIdx, endWordIdx + 1).join(' ')}
                   </span>
