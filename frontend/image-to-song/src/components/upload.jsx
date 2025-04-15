@@ -66,7 +66,8 @@ export default function FileUpload({ onSongDataReceived }) {
       <h2 className="text-lg font-semibold mb-4">Find Songs by Image</h2>
       
       <input 
-        type="file" 
+        type="file"
+        data-testid="file-input"
         onChange={handleFileChange} 
         className="mb-4 w-full text-sm text-gray-500
           file:mr-4 file:py-2 file:px-4
