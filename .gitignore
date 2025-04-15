@@ -32,3 +32,4 @@ backend/matching/hot100lyrics.csv
 backend/matching/hot.csv
 backend/matching/combined_output.csv
 .gitignore
+*__pycache__

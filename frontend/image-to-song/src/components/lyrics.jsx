@@ -5,13 +5,11 @@ export default function Lyrics({ songData }) {
   const songs = songData?.tag || [];
 
   useEffect(() => {
-    // Set the first song as current when data is loaded
     if (songs.length > 0) {
       setCurrentSong(songs[0]);
     }
   }, [songData]);
 
-  // Handle song selection
   const handleSelectSong = (song) => {
     setCurrentSong(song);
   };

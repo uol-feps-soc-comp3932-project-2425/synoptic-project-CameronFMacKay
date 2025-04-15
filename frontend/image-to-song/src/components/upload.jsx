@@ -36,22 +36,17 @@ export default function FileUpload({ onSongDataReceived }) {
       
       let processedData = response.data.image_data;
       
-      // Process the data to ensure it's in the right format and includes lyrics
       if (processedData) {
-        // If it's an array, process each item
         if (Array.isArray(processedData)) {
           processedData = processedData.map(song => {
-            // Remove any tag property if it exists
             const { tag, ...rest } = song;
             return rest;
           });
         } else if (typeof processedData === 'object') {
-          // If it's a single object, remove tag property
           const { tag, ...rest } = processedData;
           processedData = rest;
         }
         
-        // Pass the processed data to the parent component
         onSongDataReceived(response.data.image_data);
         setSongData(processedData);
         console.log(processedData);

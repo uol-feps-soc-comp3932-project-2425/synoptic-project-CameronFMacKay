@@ -8,8 +8,7 @@ export default function Spotify({ songData }) {
   const [error, setError] = useState(null);
   const [trackDetails, setTrackDetails] = useState(null);
 
-  // API URL - adjust to match your FastAPI deployment
-  const API_URL = "http://localhost:8000";  // Change this to your API URL
+  const API_URL = "http://localhost:8000"; 
 
   useEffect(() => {
     // Set the first song as current when data is loaded
@@ -35,10 +34,8 @@ export default function Spotify({ songData }) {
     setTrackDetails(null);
     
     try {
-      // Create search query in format "title artist:name"
       const searchQuery = `${song.title} artist:${song.artist}`;
       
-      // Make API call to our FastAPI backend
       const response = await fetch(
         `${API_URL}/api/spotify/search?q=${encodeURIComponent(searchQuery)}`
       );
@@ -64,7 +61,6 @@ export default function Spotify({ songData }) {
     }
   };
 
-  // Function to create a direct Spotify URL for the track
   const getSpotifyUrl = () => {
     if (trackDetails && trackDetails.external_urls && trackDetails.external_urls.spotify) {
       return trackDetails.external_urls.spotify;
@@ -92,7 +88,6 @@ export default function Spotify({ songData }) {
     <div className="flex flex-col p-6 bg-white rounded-lg shadow-md w-96">
       <h2 className="text-lg font-semibold mb-4">Spotify Player</h2>
       
-      {/* Current song details */}
       {currentSong && (
         <div className="mb-4">
           <h3 className="font-bold text-xl">{currentSong.title}</h3>
@@ -103,7 +98,6 @@ export default function Spotify({ songData }) {
         </div>
       )}
       
-      {/* Album artwork if available */}
       {trackDetails && trackDetails.album && trackDetails.album.images && trackDetails.album.images.length > 0 && (
         <div className="mb-4 flex justify-center">
           <img 
@@ -114,7 +108,6 @@ export default function Spotify({ songData }) {
         </div>
       )}
       
-      {/* Spotify embed player */}
       <div className="w-full h-80 mb-4 bg-gray-50 rounded flex items-center justify-center">
         {isLoading && (
           <div className="text-gray-600">
@@ -147,7 +140,6 @@ export default function Spotify({ songData }) {
         )}
       </div>
       
-      {/* Direct Spotify link */}
       {trackId && (
         <div className="mt-2 text-center">
           <a
@@ -161,7 +153,6 @@ export default function Spotify({ songData }) {
         </div>
       )}
       
-      {/* Song selector */}
       <div className="mt-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">Select Song:</label>
         <select 
