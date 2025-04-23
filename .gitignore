@@ -33,3 +33,5 @@ backend/matching/hot.csv
 backend/matching/combined_output.csv
 .gitignore
 *__pycache__
+uploads/dummy.jpg
+uploads/test.jpg

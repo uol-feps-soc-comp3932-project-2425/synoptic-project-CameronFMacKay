@@ -4,12 +4,17 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 import torch
 import re
+import os
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'matching'))
+index_path = os.path.join(BASE_DIR, "song_lyrics4.index")
+db_path = os.path.join(BASE_DIR, "songs4.db")
 
 def search_songs(tag, top_k, model, device):
     tag_embedding = model.encode([tag], convert_to_numpy=True, device=device)
-    index = faiss.read_index("../matching/song_lyrics4.index")
+    index = faiss.read_index(index_path)
     distances, indices = index.search(tag_embedding, top_k)
-    db_conn = sqlite3.connect("../matching/songs4.db")
+    db_conn = sqlite3.connect(db_path)
     cursor = db_conn.cursor()
     
     results = []
