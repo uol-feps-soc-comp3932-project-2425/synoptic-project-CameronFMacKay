@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/zqYhAx1c)
-
 # Machine Learning for Scene Classification and Environment-Driven Song Selection
 
 This project uses **machine learning** and **natural language processing** to recommend songs based on the content of an uploaded image.  
