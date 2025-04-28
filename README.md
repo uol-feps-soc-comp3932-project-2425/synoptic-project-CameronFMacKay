@@ -1,5 +1,97 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/zqYhAx1c)
 
+# Machine Learning for Scene Classification and Environment-Driven Song Selection
+
+This project uses **machine learning** and **natural language processing** to recommend songs based on the content of an uploaded image.  
+It classifies the image environment (e.g., beach, nightclub), analyses visual features (e.g., brightness, dominant colours), and matches the scene to song lyrics using semantic similarity search.
+
+Built using:
+- Python (FastAPI backend)
+- React (frontend)
+- PyTorch (EfficientNet-B0 image classifier)
+- Sentence-BERT (NLP for lyrics matching)
+- FAISS (vector search for 10,000+ songs)
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/uol-feps-soc-comp3932-project-2425/synoptic-project-CameronFMacKay.git
+cd synoptic-project-CameronFMacKay
+```
+
+
+### 2. Backend Setup (FastAPI)
+
+Navigate to the backend folder:
+
+```bash
+cd backend
+```
+---
+Create and activate a Python virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate    # Windows: venv\Scripts\activate
+```
+
+Install Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the backend server:
+
+```bash
+uvicorn main:app --reload
+```
+
+The FastAPI server will start at:  
+`http://127.0.0.1:8000`
+
+---
+
+### 3. Frontend Setup (React)
+
+Navigate to the frontend folder:
+
+```bash
+cd ../frontend
+```
+
+Install JavaScript dependencies:
+
+```bash
+npm install
+```
+
+Run the React development server:
+
+```bash
+npm start
+```
+
+The frontend will be accessible at:  
+`http://localhost:3000`
+
+---
+
+### 4. Environment Requirements
+
+- Python 3.10+
+- Node.js 18+
+- (Optional) CUDA-enabled GPU for local model retraining or MPS if using Applie silicon.
+- Spotify Premium account (for song previews)
+
+---
+
+
+
+
+
 ## 🧪 Frontend Testing Overview
 
 Frontend component testing was implemented using [Vitest](https://vitest.dev/) to ensure correct UI behaviour and data handling within the React application.
