@@ -119,3 +119,23 @@ The following unit tests were implemented using `pytest` to validate the functio
 | `test_spotify_search_endpoint`         | Spotify API wrapper validation        | Confirms `/api/spotify/search` returns a track list for valid queries.         |
 
 
+## External Materials
+
+### Places365 Dataset
+Zhou, B., Lapedriza, A., Khosla, A., Oliva, A. and Torralba, A., 2018. Places: A 10 million image database for scene recognition. [online] MIT CSAIL. Available at: http://places2.csail.mit.edu  [Accessed 20 Apr. 2025].
+### Top 10,000 Spotify Songs Dataset
+Beach, J., 2023. Top 10,000 Spotify Songs (1950–Now). [online] Kaggle. Available at: https://www.kaggle.com/datasets/joebeachcapital/top-10000-spotify-songs-1960-now [Accessed 28 Mar. 2025].
+Machine Learning Models and Libraries
+### EfficientNet-B0 (Image Classification)
+Tan, M. and Le, Q., 2019. EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks. In: International Conference on Machine Learning (ICML). [online] Available at: https://arxiv.org/abs/1905.11946 [Accessed 15 Mar. 2025].
+### Sentence-BERT (all-MiniLM-L6-v2)
+Reimers, N. and Gurevych, I., 2019. Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. In: Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP). [online] Available at: https://arxiv.org/abs/1908.10084 [Accessed 20 Mar. 2025].
+### WordNet
+Miller, G.A., 1995. WordNet: A lexical database for English. Communications of the ACM, 38(11), pp.39–41. [online] Available at: https://wordnet.princeton.edu  [Accessed 20 Apr. 2025].
+APIs and Tools
+### Genius API
+Genius, 2025. Genius API for lyrics metadata. [online] Available at: https://docs.genius.com/  [Accessed 22 Mar. 2025].
+### Spotify Web API
+Spotify for Developers, 2025. Spotify Web API. [online] Available at: https://developer.spotify.com/documentation/web-api [Accessed 22 Mar. 2025].
+### FAISS (Facebook AI Similarity Search)
+Johnson, J., Douze, M. and Jégou, H., 2019. Billion-scale similarity search with GPUs. IEEE Transactions on Big Data, 7(3), pp.535–547. [online] Available at: https://faiss.ai [Accessed 25 Mar. 2025].
