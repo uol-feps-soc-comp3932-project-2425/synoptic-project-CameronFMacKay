@@ -3,13 +3,6 @@
 This project uses **machine learning** and **natural language processing** to recommend songs based on the content of an uploaded image.  
 It classifies the image environment (e.g., beach, nightclub), analyses visual features (e.g., brightness, dominant colours), and matches the scene to song lyrics using semantic similarity search.
 
-Built using:
-- Python (FastAPI backend)
-- React (frontend)
-- PyTorch (EfficientNet-B0 image classifier)
-- Sentence-BERT (NLP for lyrics matching)
-- FAISS (vector search for 10,000+ songs)
-
 ## Disclaimer
 
 This project was developed as part of a dissertation and uses several forms of AI. Please keep in mind that AI can make mistakes, and music recommendations are subjective to the individual. You use this tool at your own risk. For any issues or concerns, please contact sc21cm@leeds.ac.uk.
