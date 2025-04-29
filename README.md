@@ -10,6 +10,10 @@ Built using:
 - Sentence-BERT (NLP for lyrics matching)
 - FAISS (vector search for 10,000+ songs)
 
+## Disclaimer
+
+This project was developed as part of a dissertation and uses several forms of AI. Please keep in mind that AI can make mistakes, and music recommendations are subjective to the individual. You use this tool at your own risk. For any issues or concerns, please contact sc21cm@leeds.ac.uk.
+
 ## Setup Instructions
 
 ### 1. Clone the Repository
